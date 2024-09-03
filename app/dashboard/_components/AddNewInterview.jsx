@@ -14,6 +14,9 @@ import { Textarea } from '@/components/ui/textarea';
   
 function AddNewInterview() {
     const [openDialog,setopenDialog]=useState(false);
+    const[jobPosition,setJobPosition]=useState();
+    const [jobDescription,setJobDescription]=useState();
+    const [jobExperience,setJobExperience]=useState();
   return (
     <div>
       <div className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'
@@ -27,29 +30,37 @@ function AddNewInterview() {
     <DialogHeader>
       <DialogTitle className='text-xl'>Describe more about your upcoming Interview</DialogTitle>
       <DialogDescription>
+        <form>
         <div className='font-semibold'>
           <h2>Add details about your job description,Job role/position,years of experience</h2>
         </div>
 
         <div className='mt-7 my-3'>
           <label>Job Position/Role</label>
-          <Input placeholder='Software Developer'></Input>
+          <Input placeholder='Software Developer' required  
+          onChange={(event) => setJobPosition(event.target.value)}
+          />
         </div>
 
         <div className='mt-7 my-3'>
           <label>Job Description</label>
-          <Textarea placeholder='NextJs,Redis,AngularJs,PostgreSql'></Textarea>
+          <Textarea placeholder='NextJs,Redis,AngularJs,PostgreSql'
+          onChange={(event) => setJobDescription(event.target.value)}
+          />
         </div>
 
         <div className='mt-7 my-3'>
           <label>Years of Experience</label>
-          <Input placeholder='3' type='number'></Input>
+          <Input placeholder='3' type='number' max='69'
+          onChange={(event) => setJobExperience(event.target.value)}
+          />
         </div>
 
         <div className='flex gap-4 justify-end'>
-            <Button>Start Interview</Button>
-            <Button variant="ghost" onClick={()=> setopenDialog(false)}>Discard</Button>
+            <Button type='submit'>Start Interview</Button>
+            <Button type='button' variant="ghost" onClick={()=> setopenDialog(false)}>Discard</Button>
         </div>
+        </form>
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
