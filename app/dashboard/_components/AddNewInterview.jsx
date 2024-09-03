@@ -9,6 +9,8 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
   
 function AddNewInterview() {
     const [openDialog,setopenDialog]=useState(false);
@@ -25,11 +27,24 @@ function AddNewInterview() {
     <DialogHeader>
       <DialogTitle className='text-xl'>Describe more about your upcoming Interview</DialogTitle>
       <DialogDescription>
-        <div>
+        <div className='font-semibold'>
           <h2>Add details about your job description,Job role/position,years of experience</h2>
         </div>
 
-        <div></div>
+        <div className='mt-7 my-3'>
+          <label>Job Position/Role</label>
+          <Input placeholder='Software Developer'></Input>
+        </div>
+
+        <div className='mt-7 my-3'>
+          <label>Job Description</label>
+          <Textarea placeholder='NextJs,Redis,AngularJs,PostgreSql'></Textarea>
+        </div>
+
+        <div className='mt-7 my-3'>
+          <label>Years of Experience</label>
+          <Input placeholder='3' type='number'></Input>
+        </div>
 
         <div className='flex gap-4 justify-end'>
             <Button>Start Interview</Button>
