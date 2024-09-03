@@ -21,12 +21,15 @@ function AddNewInterview() {
       </div>
       <Dialog open={openDialog}>
   
-  <DialogContent>
+  <DialogContent className='max-w-xl'>
     <DialogHeader>
-      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogTitle className='text-xl'>Describe more about your upcoming Interview</DialogTitle>
       <DialogDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
+        <div>
+          <h2>Add details about your job description,Job role/position,years of experience</h2>
+        </div>
+
+        <div></div>
 
         <div className='flex gap-4 justify-end'>
             <Button>Start Interview</Button>
