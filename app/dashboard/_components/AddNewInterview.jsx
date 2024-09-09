@@ -17,6 +17,10 @@ function AddNewInterview() {
     const[jobPosition,setJobPosition]=useState();
     const [jobDescription,setJobDescription]=useState();
     const [jobExperience,setJobExperience]=useState();
+
+    const onSubmit = () => {
+      console.log(jobPosition,jobDescription,jobExperience);
+    }
   return (
     <div>
       <div className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'
@@ -30,7 +34,7 @@ function AddNewInterview() {
     <DialogHeader>
       <DialogTitle className='text-xl'>Describe more about your upcoming Interview</DialogTitle>
       <DialogDescription>
-        <form>
+        <form onSubmit={onSubmit}>
         <div className='font-semibold'>
           <h2>Add details about your job description,Job role/position,years of experience</h2>
         </div>
