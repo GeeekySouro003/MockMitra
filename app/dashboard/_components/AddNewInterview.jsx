@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { ChatSession } from '@google/generative-ai';
   
 function AddNewInterview() {
     const [openDialog,setopenDialog]=useState(false);
@@ -18,10 +19,18 @@ function AddNewInterview() {
     const [jobDescription,setJobDescription]=useState();
     const [jobExperience,setJobExperience]=useState();
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
       e.preventDefault();
       console.log(jobPosition,jobDescription,jobExperience);
+
+      const InputPrompt="Job Profile:" + jobPosition + "Job Description:" +jobDescription + "Experience:" +process.env.NEXT_PUBLIC_YEARS_OF_EXPERIENCE + "based on the data write 5 interview question and answers in json format and take question and answer as json field values"
+
+      const result=await ChatSession.SendMessage(InputPrompt);
+
+      console.log(result.response.text());
     }
+
+   
   return (
     <div>
       <div className='p-10 border rounded-lg bg-secondary hover:scale-105 hover:shadow-md cursor-pointer transition-all'
