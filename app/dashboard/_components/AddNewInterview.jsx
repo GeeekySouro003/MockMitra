@@ -18,7 +18,8 @@ function AddNewInterview() {
     const [jobDescription,setJobDescription]=useState();
     const [jobExperience,setJobExperience]=useState();
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+      e.preventDefault();
       console.log(jobPosition,jobDescription,jobExperience);
     }
   return (
