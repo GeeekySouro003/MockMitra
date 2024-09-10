@@ -21,6 +21,7 @@ function AddNewInterview() {
     const [jobDescription,setJobDescription]=useState();
     const [jobExperience,setJobExperience]=useState();
     const [loading,setLoading]=useState(false);
+    const [jsonresponse,setjsonresponse]=useState([]);
 
     const onSubmit = async(e) => {
       setLoading(true);
@@ -30,10 +31,8 @@ function AddNewInterview() {
       const InputPrompt="Job Profile:" + jobPosition + "Job Description:" +jobDescription + "Experience:" +process.env.NEXT_PUBLIC_YEARS_OF_EXPERIENCE + "based on the data write 5 interview question and answers in json format and take question and answer as json field values"
       const result=await chatSession.sendMessage(InputPrompt);
       const mockjsonresp=(result.response.text()).replace('```json','').replace('```','');
-      
-
       console.log(JSON.parse(mockjsonresp));
-
+      setjsonresponse(mockjsonresp);
       setLoading(false);
     }
 
@@ -81,7 +80,7 @@ function AddNewInterview() {
             <Button type='submit' disabled={loading}>
             {loading ?
               <>
-              <LoaderCircle className='animate-spin'>"Generating from AI"</LoaderCircle>
+              <LoaderCircle className='animate-spin'/>Generating from AI
               </>:'Start Interview'
             }
             
