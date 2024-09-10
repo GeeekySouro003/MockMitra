@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { chatSession } from '@/utils/GeminiModal';
+import { LoaderCircle } from 'lucide-react';
 
   
 function AddNewInterview() {
@@ -19,16 +20,21 @@ function AddNewInterview() {
     const[jobPosition,setJobPosition]=useState();
     const [jobDescription,setJobDescription]=useState();
     const [jobExperience,setJobExperience]=useState();
+    const [loading,setLoading]=useState(false);
 
     const onSubmit = async(e) => {
+      setLoading(true);
       e.preventDefault();
       console.log(jobPosition,jobDescription,jobExperience);
 
       const InputPrompt="Job Profile:" + jobPosition + "Job Description:" +jobDescription + "Experience:" +process.env.NEXT_PUBLIC_YEARS_OF_EXPERIENCE + "based on the data write 5 interview question and answers in json format and take question and answer as json field values"
-
       const result=await chatSession.sendMessage(InputPrompt);
+      const mockjsonresp=(result.response.text()).replace('```json','').replace('```','');
+      
 
-      console.log(result.response.text());
+      console.log(JSON.parse(mockjsonresp));
+
+      setLoading(false);
     }
 
    
@@ -72,7 +78,14 @@ function AddNewInterview() {
         </div>
 
         <div className='flex gap-4 justify-end'>
-            <Button type='submit'>Start Interview</Button>
+            <Button type='submit' disabled={loading}>
+            {loading ?
+              <>
+              <LoaderCircle className='animate-spin'>"Generating from AI"</LoaderCircle>
+              </>:'Start Interview'
+            }
+            
+            </Button>
             <Button type='button' variant="ghost" onClick={()=> setopenDialog(false)}>Discard</Button>
         </div>
         </form>
