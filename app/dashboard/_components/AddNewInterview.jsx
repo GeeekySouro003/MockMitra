@@ -11,7 +11,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ChatSession } from '@google/generative-ai';
+import { chatSession } from '@/utils/GeminiModal';
+
   
 function AddNewInterview() {
     const [openDialog,setopenDialog]=useState(false);
@@ -25,7 +26,7 @@ function AddNewInterview() {
 
       const InputPrompt="Job Profile:" + jobPosition + "Job Description:" +jobDescription + "Experience:" +process.env.NEXT_PUBLIC_YEARS_OF_EXPERIENCE + "based on the data write 5 interview question and answers in json format and take question and answer as json field values"
 
-      const result=await ChatSession.SendMessage(InputPrompt);
+      const result=await chatSession.sendMessage(InputPrompt);
 
       console.log(result.response.text());
     }
