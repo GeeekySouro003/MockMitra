@@ -40,7 +40,9 @@ function AddNewInterview() {
       console.log(JSON.parse(mockjsonresp));
       setjsonresponse(mockjsonresp);
 
-      const resp=await db.insert(MockInterview)
+
+      if(mockjsonresp) {
+        const resp=await db.insert(MockInterview)
       .values({
         mockId:uuidv4(),
         jsonMockResp:mockjsonresp,
@@ -52,6 +54,14 @@ function AddNewInterview() {
       }).returning({mockId:MockInterview.mockId});
 
        console.log("INSERTED ID:",resp);
+      }
+      if(resp) {
+        setopenDialog(false);
+      }
+      else {
+        console.log("ERROR OCCURED");
+      }
+      
 
       setLoading(false);
     }
