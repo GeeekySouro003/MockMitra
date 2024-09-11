@@ -13,6 +13,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { chatSession } from '@/utils/GeminiModal';
 import { LoaderCircle } from 'lucide-react';
+import { MockInterview } from '@/utils/schema';
+import { db } from '@/utils/db';
 
   
 function AddNewInterview() {
@@ -33,6 +35,8 @@ function AddNewInterview() {
       const mockjsonresp=(result.response.text()).replace('```json','').replace('```','');
       console.log(JSON.parse(mockjsonresp));
       setjsonresponse(mockjsonresp);
+
+      const resp=await db.insert(MockInterview);
       setLoading(false);
     }
 
