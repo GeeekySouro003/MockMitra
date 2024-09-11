@@ -17,6 +17,7 @@ import { MockInterview } from '@/utils/schema';
 import { db } from '@/utils/db';
 import { v4 as uuidv4 } from 'uuid';
 import { useUser } from '@clerk/nextjs';
+import moment from 'moment/moment';
 
   
 function AddNewInterview() {
@@ -46,8 +47,12 @@ function AddNewInterview() {
         jobPosition:jobPosition,
         jobDesc:jobDescription,
         jobExperience:jobExperience,
-        createdBy:
-      })
+        createdBy:user?.primaryEmailAddress?.emailAddress,
+        createdAt:moment().format('DD-MM-YYYY')
+      }).returning({mockId:MockInterview.mockId});
+
+       console.log("INSERTED ID:",resp);
+
       setLoading(false);
     }
 
