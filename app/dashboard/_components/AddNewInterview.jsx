@@ -15,6 +15,8 @@ import { chatSession } from '@/utils/GeminiModal';
 import { LoaderCircle } from 'lucide-react';
 import { MockInterview } from '@/utils/schema';
 import { db } from '@/utils/db';
+import { v4 as uuidv4 } from 'uuid';
+import { useUser } from '@clerk/nextjs';
 
   
 function AddNewInterview() {
@@ -24,6 +26,7 @@ function AddNewInterview() {
     const [jobExperience,setJobExperience]=useState();
     const [loading,setLoading]=useState(false);
     const [jsonresponse,setjsonresponse]=useState([]);
+    const {user}=useUser();
 
     const onSubmit = async(e) => {
       setLoading(true);
@@ -36,7 +39,15 @@ function AddNewInterview() {
       console.log(JSON.parse(mockjsonresp));
       setjsonresponse(mockjsonresp);
 
-      const resp=await db.insert(MockInterview);
+      const resp=await db.insert(MockInterview)
+      .values({
+        mockId:uuidv4(),
+        jsonMockResp:mockjsonresp,
+        jobPosition:jobPosition,
+        jobDesc:jobDescription,
+        jobExperience:jobExperience,
+        createdBy:
+      })
       setLoading(false);
     }
 
