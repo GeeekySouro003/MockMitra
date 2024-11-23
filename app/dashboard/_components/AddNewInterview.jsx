@@ -60,6 +60,9 @@ function AddNewInterview() {
       if(resp) {
         setopenDialog(false);
         router.push('/dashboard/interview/'+resp[0]?.mockId)
+        console.log("Response:", resp);
+console.log("Mock ID:", resp[0]?.mockId);
+
       }
     }
     
