@@ -6,6 +6,7 @@ import { json } from 'drizzle-orm/mysql-core';
 import React, { useEffect, useState } from 'react'
 import QuestionSection from './_components/QuestionsSection';
 import QuestionsSection from './_components/QuestionsSection';
+import RecordAnswerSection from './_components/RecordAnswerSection';
 
 function StartInterview({params}) {
 
@@ -34,7 +35,7 @@ GetInterviewDetails();
 
   return (
     <div>
-      <div className='grid grid-cols-1 md:grid-cols-2'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
         {/*Questions*/}
         <QuestionsSection mockInterviewQuestion={mockInterviewQuestion}
         activeQuestionIndex={activeQuestionIndex}
@@ -42,6 +43,7 @@ GetInterviewDetails();
 
 
         {/*Recording */}
+        <RecordAnswerSection/>
       </div>
     </div>
   )
