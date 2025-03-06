@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './_components/Header'
+import { ClerkProvider } from '@clerk/nextjs'
 
 function DashboardLayout({children}) {
   return (
