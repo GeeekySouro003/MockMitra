@@ -1,5 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
+import { chatSession } from '@/utils/GeminiModal'
 import { Mic } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -29,17 +30,21 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex}) {
 
   },[results])
 
-  const SaveUserAnswer=()=> {
+  const SaveUserAnswer= async()=> {
     if(isRecording) {
       stopSpeechToText()
       if(userAnswer?.length<10) {
         toast("Error occured! Please record your answer again")
         return;
       }
-      const feedbackPrompt="Question:"+mockInterviewQuestion[activeQuestionIndex]?.question
-      ", User Answer:"+userAnswer+", Depends on question and user answer for given interview question "+ 
-      " Please give us rating for answer accuracy and feedback for providing better services "+
-      " within a few words  to improve it in JSON format with rating field and feedback field ";
+      const feedbackPrompt="Question"+mockInterviewQuestion[activeQuestionIndex]?.question+
+      ", User Answer:"+userAnswer+",Depends on question and user answer for given interview question "+
+      " please give us rating for answer and feedback as area of improvement if any "+
+      "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
+      const result=await chatSession.sendMessage(feedbackPrompt);
+      const mockJsonresp=(result.response.text()).replace('```json','').replace('```','');
+      console.log(mockJsonresp);
+      const JsonFeedbackResp=JSON.parse(mockJsonresp);
     }
     else {
       startSpeechToText()
