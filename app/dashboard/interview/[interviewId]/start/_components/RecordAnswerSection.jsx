@@ -1,7 +1,11 @@
 "use client"
 import { Button } from '@/components/ui/button'
+import { db } from '@/utils/db'
 import { chatSession } from '@/utils/GeminiModal'
+import { UserAnswer } from '@/utils/schema'
+import { useUser } from '@clerk/nextjs'
 import { Mic } from 'lucide-react'
+import moment from 'moment'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import useSpeechToText from 'react-hook-speech-to-text'
@@ -9,8 +13,10 @@ import Webcam from 'react-webcam'
 import { toast } from 'sonner'
 //import useSpeechToText from 'react-hook-speech-to-text';
 
-function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex}) {
+function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex,interviewData}) {
   const[userAnswer,setUserAnswer] = useState('');
+  const {user}=useUser();
+  const[loading,setLoading]=useState(false); 
   const {
     error,
     interimResult,
@@ -32,8 +38,10 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex}) {
 
   const SaveUserAnswer= async()=> {
     if(isRecording) {
+      setLoading(true); 
       stopSpeechToText()
       if(userAnswer?.length<10) {
+        setLoading(false);
         toast("Error occured! Please record your answer again")
         return;
       }
@@ -45,12 +53,31 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex}) {
       const mockJsonresp=(result.response.text()).replace('```json','').replace('```','');
       console.log(mockJsonresp);
       const JsonFeedbackResp=JSON.parse(mockJsonresp);
+
+      const resp=await db.insert(UserAnswer).values({
+        mockIdRef:interviewData?.mockId,
+        question:mockInterviewQuestion[activeQuestionIndex]?.question,
+        correctAns:mockInterviewQuestion[activeQuestionIndex]?.answer,
+        userAns:userAnswer,
+        feedback:JsonFeedbackResp?.feedback,
+        rating:JsonFeedbackResp?.rating,
+        userEmail:user?.primaryEmailAddress.emailAddress,
+        createdAt:moment().format('DD-MM-YYYY')
+        
+      })
+
+      if(resp) {
+        toast('User answer recorded successfully!'); 
+      }   
+      setUserAnswer('');
+      setLoading(false);
     }
     else {
       startSpeechToText()
     }
   }
 
+  
   return (
     <div className='flex items-center justify-center flex-col'>
 <div className='flex flex-col justify-center items-center bg-black rounded-lg p-5 mt-20'>
@@ -65,7 +92,9 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex}) {
       mirrored={true}
       />
     </div>
-    <Button variant="outline" className="my-10" 
+    <Button 
+    disabled={loading}
+    variant="outline" className="my-10" 
     onClick={SaveUserAnswer}
     >
       {isRecording?

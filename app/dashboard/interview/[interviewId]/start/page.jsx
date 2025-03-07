@@ -46,6 +46,7 @@ GetInterviewDetails();
         <RecordAnswerSection
         mockInterviewQuestion={mockInterviewQuestion}
         activeQuestionIndex={activeQuestionIndex}
+        interviewData={interviewData}
         />
       </div>
     </div>
