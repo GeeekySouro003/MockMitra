@@ -32,26 +32,27 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex,intervie
   useEffect(() => {
     results.map((result)=> {
       setUserAnswer(prevAns=>prevAns+result?.transcript)
-    },[results])
-
-    useEffect(()=>{
-      if(!isRecording && userAnswer.length>10 ) {
-        UpdateUserAnswer();
-      }
-
-    },[userAnswer])
+    })
 
   },[results])
+
+
+  useEffect(()=>{
+    if(!isRecording && userAnswer.length>10 ) {
+      UpdateUserAnswer();
+    }
+    // if(userAnswer?.length<10) {
+    //   setLoading(false);
+    //   toast("Error occured! Please record your answer again")
+    //   return;
+    // }
+  },[userAnswer])
 
   const StartStopRecording= async()=> {
     if(isRecording) {
        
       stopSpeechToText()
-      if(userAnswer?.length<10) {
-        setLoading(false);
-        toast("Error occured! Please record your answer again")
-        return;
-      }
+    
       
     }
     else {
@@ -62,30 +63,30 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex,intervie
   const UpdateUserAnswer=async()=>{
     console.log(userAnswer);  
     setLoading(true);
-    // const feedbackPrompt="Question"+mockInterviewQuestion[activeQuestionIndex]?.question+
-    // ", User Answer:"+userAnswer+",Depends on question and user answer for given interview question "+
-    // " please give us rating for answer and feedback as area of improvement if any "+
-    // "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
-    // const result=await chatSession.sendMessage(feedbackPrompt);
-    // const mockJsonresp=(result.response.text()).replace('```json','').replace('```','');
-    // console.log(mockJsonresp);
-    // const JsonFeedbackResp=JSON.parse(mockJsonresp);
+    const feedbackPrompt="Question"+mockInterviewQuestion[activeQuestionIndex]?.question+
+    ", User Answer:"+userAnswer+",Depends on question and user answer for given interview question "+
+    " please give us rating for answer and feedback as area of improvement if any "+
+    "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
+    const result=await chatSession.sendMessage(feedbackPrompt);
+    const mockJsonresp=(result.response.text()).replace('```json','').replace('```','');
+    console.log(mockJsonresp);
+    const JsonFeedbackResp=JSON.parse(mockJsonresp);
 
-    // const resp=await db.insert(UserAnswer).values({
-    //   mockIdRef:interviewData?.mockId,
-    //   question:mockInterviewQuestion[activeQuestionIndex]?.question,
-    //   correctAns:mockInterviewQuestion[activeQuestionIndex]?.answer,
-    //   userAns:userAnswer,
-    //   feedback:JsonFeedbackResp?.feedback,
-    //   rating:JsonFeedbackResp?.rating,
-    //   userEmail:user?.primaryEmailAddress.emailAddress,
-    //   createdAt:moment().format('DD-MM-YYYY')
+    const resp=await db.insert(UserAnswer).values({
+      mockIdRef:interviewData?.mockId,
+      question:mockInterviewQuestion[activeQuestionIndex]?.question,
+      correctAns:mockInterviewQuestion[activeQuestionIndex]?.answer,
+      userAns:userAnswer,
+      feedback:JsonFeedbackResp?.feedback,
+      rating:JsonFeedbackResp?.rating,
+      userEmail:user?.primaryEmailAddress.emailAddress,
+      createdAt:moment().format('DD-MM-YYYY')
       
-    // })
+    })
 
-    // if(resp) {
-    //   toast('User answer recorded successfully!'); 
-    // }   
+    if(resp) {
+      toast('User answer recorded successfully!'); 
+    }   
     setUserAnswer('');
     setLoading(false);
   }
@@ -115,7 +116,7 @@ function RecordAnswerSection({mockInterviewQuestion,activeQuestionIndex,intervie
         <Mic/> Stop Recording..
       </h2>
       : 'Record Answer'}</Button>
-      <Button onClick={()=>console.log(userAnswer)}>Show Answer</Button>
+    
     
     </div>
     
