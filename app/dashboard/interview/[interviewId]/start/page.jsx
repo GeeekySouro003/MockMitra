@@ -53,7 +53,7 @@ GetInterviewDetails();
       <div className='flex justify-end gap-5'>
        {activeQuestionIndex>0&& 
        <Button>Previous Question</Button>}
-        {activeQuestionIndex==mockInterviewQuestion?.length-1 && 
+        {activeQuestionIndex!=mockInterviewQuestion?.length-1 && 
         <Button onClick={()=>setActiveQuestionIndex(activeQuestionIndex+1)}>Next Question</Button>}
         {activeQuestionIndex==mockInterviewQuestion?.length-1 &&
          <Button>End Interview</Button>}
