@@ -8,6 +8,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import { ChevronsUpDown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 
 function Feedback({params}) {
@@ -35,16 +37,23 @@ const[feedbackList,setFeedbackList]=useState([]);
     
 
       <h2 className='text-sm text-gray-600'>Find below Interview Question with Correct Answer , Your answer and feedback for improvement</h2>
-      {feedbackList&&feedbackList.map((item,index)=>{
-        <Collapsible key={index}>
-        <CollapsibleTrigger>Can I use this in my project?</CollapsibleTrigger>
-        <CollapsibleContent>
-          Yes. Free to use for personal and commercial projects. No attribution
-          required.
-        </CollapsibleContent>
-      </Collapsible>
-      
-      })}
+      {feedbackList && feedbackList.map((item, index) => (
+  <Collapsible key={index} className='mt-7'>
+    <CollapsibleTrigger className='p-2  gap-7 bg-secondary rounded-lg my-2 text-left flex justify-between w-full'>
+    {item.question} <ChevronsUpDown className='h-5 w-5'/>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+   <div className='flex flex-col gap-2'>
+    <h2 className='text-red-600 p-2 border rounded-lg'><strong>Rating:</strong>{item.rating}</h2>
+    <h2 className='p-2 border rounded-lg bg-red-50 text-md text-red-950'><strong>Your Answer: </strong>{item.userAns}</h2>
+    <h2 className='p-2 border rounded-lg bg-green-50 text-md text-green-950'><strong>Correct Answer: </strong>{item.correctAns}</h2>
+    <h2 className='p-2 border rounded-lg bg-blue-50 text-md text-primary'><strong>Feedback: </strong>{item.feedback}</h2>
+   </div>
+    </CollapsibleContent>
+  </Collapsible>
+))}
+
+<Button>Go Home</Button>
     </div>
     
   )
