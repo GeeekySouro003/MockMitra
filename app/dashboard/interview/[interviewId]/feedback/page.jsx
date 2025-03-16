@@ -10,11 +10,14 @@ import {
 } from "@/components/ui/collapsible"
 import { ChevronsUpDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 
 function Feedback({params}) {
 
 const[feedbackList,setFeedbackList]=useState([]);
+const router=useRouter();
+
   useEffect(()=>{
      GetFeedback();
   },[])
@@ -53,7 +56,7 @@ const[feedbackList,setFeedbackList]=useState([]);
   </Collapsible>
 ))}
 
-<Button>Go Home</Button>
+<Button onclick={()=>router.replace('/app/dashboard')}>Go Home</Button>
     </div>
     
   )
