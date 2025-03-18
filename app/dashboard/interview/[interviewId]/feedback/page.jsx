@@ -56,7 +56,7 @@ const router=useRouter();
   </Collapsible>
 ))}
 
-<Button onclick={()=>router.replace('/app/dashboard')}>Go Home</Button>
+<Button onClick={()=>router.replace('/dashboard')}>Go Home</Button>
     </div>
     
   )
