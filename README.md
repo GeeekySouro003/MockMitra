@@ -37,6 +37,13 @@
   <img src="https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white" />
 </p>
 
+
+## 📸 Screenshots
+
+| Homepage | Feedback Summary |
+|----------|------------------|------------------|
+| ![Homepage]('./public/homescreen.png') | ![Feedback]('./public/feedback.png') |
+
 ---
 
 ## 🧑‍💻 Getting Started
