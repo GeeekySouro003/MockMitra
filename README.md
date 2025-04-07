@@ -42,7 +42,7 @@
 
 | Homepage | Feedback Summary |
 |----------|------------------|------------------|
-| ![Homepage]('./public/homescreen.png') | ![Feedback]('./public/feedback.png') |
+| ![Homepage]![alt text](public/homescreen.png) | ![Feedback]  ![alt text](public/feedback.png)|
 
 ---
 
