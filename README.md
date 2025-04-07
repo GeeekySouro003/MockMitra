@@ -27,10 +27,16 @@
   <img src="https://img.shields.io/badge/Express.js-000?logo=express&logoColor=white" />
 </p>
 
-### Database  
+### Database
 <p>
-  <img src="https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Neon-000?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMzAiPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0xNy4yIDBoMjAuN2w5LjggMTQuN2w5LjgtMTQuN0g3OC4ybC0xNy4yIDI1LjMgMTcuMiAyNS4zSDU3LjdsLTkuOC0xNC43LTkuOCAxNC43SDI3LjJsMTcuMi0yNS4zTDI3LjIgMGgyMC43bDkuOCAxNC43eiIvPjwvc3ZnPg==&logoColor=white" />
 </p>
+
+### ORM
+<p>
+  <img src="https://img.shields.io/badge/Drizzle_Studio-000?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMzAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMzAiPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0xNy4yIDBoMjAuN2w5LjggMTQuN2w5LjgtMTQuN0g3OC4ybC0xNy4yIDI1LjMgMTcuMiAyNS4zSDU3LjdsLTkuOC0xNC43LTkuOCAxNC43SDI3LjJsMTcuMi0yNS4zTDI3LjIgMGgyMC43bDkuOCAxNC43eiIvPjwvc3ZnPg==&logoColor=white" />
+</p>
+
 
 ### AI Integration  
 <p>
