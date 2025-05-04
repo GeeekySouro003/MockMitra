@@ -233,7 +233,7 @@ export default function Home() {
                 className="flex flex-col sm:flex-row gap-4 pt-4"
               >
                 <Link
-                  href="/signup"
+                  href="/dashboard"
                   className={`px-6 py-3 rounded-lg text-white font-medium ${darkMode ? "bg-purple-600 hover:bg-purple-700" : "bg-purple-500 hover:bg-purple-600"} transition-colors flex items-center justify-center gap-2`}
                 >
                   Start Practicing <ArrowRight className="h-4 w-4" />
@@ -257,9 +257,9 @@ export default function Home() {
               ></div>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=600&width=600"
-                  width={600}
-                  height={600}
+                  src="/hero.avif"
+                  width={700}
+                  height={700}
                   alt="MockMitra Interview Platform"
                   className="rounded-2xl shadow-xl"
                 />
