@@ -759,7 +759,7 @@ export default function Home() {
                 </svg>
               </Link>
               <Link
-                href="#"
+                href="https://github.com/GeeekySouro003/MockMitra"
                 className={darkMode ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"}
               >
                 <span className="sr-only">GitHub</span>
